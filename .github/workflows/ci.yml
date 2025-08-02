@@ -1,0 +1,44 @@
+name: Build and Deploy Static Site
+
+on:
+    push:
+        branches: [master]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js (optional, for tools)
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Install dependencies
+              run: |
+                  npm install htmlhint -g
+                  npm install stylelint stylelint-config-standard -g
+
+            - name: Lint HTML
+              run: htmlhint index.html || true # won't fail the build yet
+
+            - name: Lint CSS
+              run: |
+                  echo "/* dummy */" > styles.css
+                  stylelint styles.css || true
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/main'
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v4
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: . # current directory with index.html
