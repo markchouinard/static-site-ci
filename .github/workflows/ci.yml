@@ -18,15 +18,15 @@ jobs:
 
             - name: Install dependencies
               run: |
-                  pn install --frozen-lockfile || pn add -D htmlhint stylelint stylelint-config-standard
+                  pnpm install --frozen-lockfile || pnpm add -D htmlhint stylelint stylelint-config-standard
 
             - name: Lint HTML
-              run: pn exec htmlhint index.html
+              run: pnpm exec htmlhint index.html
 
             - name: Lint CSS
               run: |
                   echo "/* dummy */" > styles.css
-                  pn exec stylelint styles.css
+                  pnpm exec stylelint styles.css
 
             - name: Run basic tests
               run: ./test.sh
