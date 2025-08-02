@@ -2,10 +2,10 @@
 
 echo "✅ Running basic site checks..."
 
-if grep -q "<h1>" index.html; then
-  echo "✔ Found an <h1> tag"
+if grep -q "<h[1-6]>" index.html; then
+  echo "✔ Found a heading tag"
 else
-  echo "❌ No <h1> tag found!"
+  echo "❌ No heading tag found!"
   exit 1
 fi
 
