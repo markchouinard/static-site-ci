@@ -29,6 +29,9 @@ jobs:
                   echo "/* dummy */" > styles.css
                   stylelint styles.css
 
+            - name: Run basic tests
+              run: ./test.sh
+
     deploy:
         needs: build
         runs-on: ubuntu-latest
