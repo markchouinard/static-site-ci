@@ -1,0 +1,20 @@
+{
+	"tagname-lowercase": true,
+	"attr-lowercase": true,
+	"doctype-first": true,
+	"id-unique": true,
+	"head-script-disabled": false,
+	"style-disabled": false,
+	"title-require": true,
+	"tag-pair": true,
+	"spec-char-escape": true,
+	"alt-require": false,
+	"src-not-empty": true,
+	"attr-no-duplication": true,
+	"doctype-html5": true,
+	"space-tab-mixed-disabled": "tab",
+	"id-class-value": "dash",
+	"href-abs-or-rel": false,
+	"attr-unsafe-chars": true,
+	"heading-level": false
+}
