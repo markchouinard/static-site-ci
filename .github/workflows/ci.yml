@@ -22,17 +22,17 @@ jobs:
                   npm install stylelint stylelint-config-standard -g
 
             - name: Lint HTML
-              run: htmlhint index.html || true # won't fail the build yet
+              run: htmlhint index.html
 
             - name: Lint CSS
               run: |
                   echo "/* dummy */" > styles.css
-                  stylelint styles.css || true
+                  stylelint styles.css
 
     deploy:
         needs: build
         runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
