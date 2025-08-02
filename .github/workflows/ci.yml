@@ -11,23 +11,22 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
-            - name: Setup Node.js (optional, for tools)
-              uses: actions/setup-node@v4
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v2
               with:
-                  node-version: 20
+                  version: 10.14.0
 
             - name: Install dependencies
               run: |
-                  npm install htmlhint -g
-                  npm install stylelint stylelint-config-standard -g
+                  pn install --frozen-lockfile || pn add -D htmlhint stylelint stylelint-config-standard
 
             - name: Lint HTML
-              run: htmlhint index.html
+              run: pn exec htmlhint index.html
 
             - name: Lint CSS
               run: |
                   echo "/* dummy */" > styles.css
-                  stylelint styles.css
+                  pn exec stylelint styles.css
 
             - name: Run basic tests
               run: ./test.sh
@@ -44,4 +43,4 @@ jobs:
               uses: peaceiris/actions-gh-pages@v4
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: . # current directory with index.html
+                  publish_dir: .
